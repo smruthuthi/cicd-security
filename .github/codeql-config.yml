@@ -1,32 +1,18 @@
-# CodeQL Analysis Configuration
 name: "JavaScript Security Analysis"
 
-# Specify which files to analyze
+disable-default-queries: false
+
+queries:
+  - uses: security-and-quality
+  - uses: security-extended
+
 paths:
   - '.'
 
 paths-ignore:
   - '**/node_modules'
   - '**/dist'
-  - '**/build'
-
-# Query specifications
-queries:
-  - uses: security-and-quality
-  - uses: security-extended
-  - uses: codeql/javascript-queries@main
-  - uses: codeql-custom-queries-javascript
-  
-query-filters:
-  - include:
-      tags contain:
-        - "security"
-        - "correctness"
-
-# Database settings
-database:
-  analyze:
-    language: javascripton file to ensure all JavaScript files are analyzed
+  - '**/build'on file to ensure all JavaScript files are analyzed
 name: "Full JS Analysis"
 
 paths-ignore:

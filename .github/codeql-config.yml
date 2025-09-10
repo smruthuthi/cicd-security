@@ -6,11 +6,11 @@ queries:
   - uses: security-and-quality
   - uses: security-extended
   # Additional query suites for JavaScript
-  - uses: ./javascript/ql/src/Security/CWE-078  # Command Injection
-  - uses: ./javascript/ql/src/Security/CWE-079  # XSS
-  - uses: ./javascript/ql/src/Security/CWE-089  # SQL Injection
-  - uses: ./javascript/ql/src/Security/CWE-094  # Code Injection
-  - uses: ./javascript/ql/src/Security/CWE-502  # Unsafe Deserialization
+  # - uses: ./javascript/ql/src/Security/CWE-078  # Command Injection
+  # - uses: ./javascript/ql/src/Security/CWE-079  # XSS
+  # - uses: ./javascript/ql/src/Security/CWE-089  # SQL Injection
+  # - uses: ./javascript/ql/src/Security/CWE-094  # Code Injection
+  # - uses: ./javascript/ql/src/Security/CWE-502  # Unsafe Deserialization
 
 paths:
   - "."

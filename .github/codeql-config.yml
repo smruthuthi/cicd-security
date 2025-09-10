@@ -1,25 +1,32 @@
-# CodeQL configuration file to ensure all JavaScript files are analyzed
-name: "Full JS Analysis"
+# CodeQL Analysis Configuration
+name: "JavaScript Security Analysis"
+
+# Specify which files to analyze
+paths:
+  - '.'
 
 paths-ignore:
   - '**/node_modules'
   - '**/dist'
   - '**/build'
 
-paths:
-  - '.'
-
+# Query specifications
 queries:
   - uses: security-and-quality
   - uses: security-extended
-  # Additional security query suites
-  - name: Extended Security Queries
-    uses: security-extended
-    from: codeql/javascript-queries
-  - name: Command Injection
-    uses: codeql/javascript-queries:javascript/ql/src/Security/CWE-078-CommandInjection.ql@main
-  - name: SQL Injection
-    uses: codeql/javascript-queries:javascript/ql/src/Security/CWE-089-SqlInjection.ql@mainon file to ensure all JavaScript files are analyzed
+  - uses: codeql/javascript-queries@main
+  - uses: codeql-custom-queries-javascript
+  
+query-filters:
+  - include:
+      tags contain:
+        - "security"
+        - "correctness"
+
+# Database settings
+database:
+  analyze:
+    language: javascripton file to ensure all JavaScript files are analyzed
 name: "Full JS Analysis"
 
 paths-ignore:

@@ -1,13 +1,26 @@
 # CodeQL configuration file to ensure all JavaScript files are analyzed
 name: "Full JS Analysis"
 
-paths:
-  - app.js
+paths-ignore:
+  - "**/node_modules"
+  - "**/dist"
+  - "**/build"
 
-# Optionally, you can add more files or folders if needed
-# paths:
-#   - app.js
-#   - src/
+paths:
+  - "."
 
 queries:
+  - uses: security-and-quality
   - uses: security-extended
+  # Additional query suites for JavaScript
+  - uses: ./javascript/ql/src/Security/CWE-078 # Command Injection
+  - uses: ./javascript/ql/src/Security/CWE-079 # XSS
+  - uses: ./javascript/ql/src/Security/CWE-089 # SQL Injection
+  - uses: ./javascript/ql/src/Security/CWE-094 # Code Injection
+  - uses: ./javascript/ql/src/Security/CWE-502 # Unsafe Deserialization
+
+# Enable non-default queries
+disable-default-queries: false
+
+# Enable more detailed analysis
+optimize: true

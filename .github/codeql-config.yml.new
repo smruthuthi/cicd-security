@@ -1,0 +1,11 @@
+name: "JavaScript Security Analysis"
+disable-default-queries: false
+queries:
+  - uses: security-and-quality
+  - uses: security-extended
+paths:
+  - "."
+paths-ignore:
+  - "**/node_modules"
+  - "**/dist"
+  - "**/build"

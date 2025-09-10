@@ -1,40 +1,21 @@
-name: "JavaScript Security Analysis"
+name: "Full JS Security Analysis"
 
 disable-default-queries: false
-
-queries:
-  - uses: security-and-quality
-  - uses: security-extended
-
-paths:
-  - '.'
-
-paths-ignore:
-  - '**/node_modules'
-  - '**/dist'
-  - '**/build'on file to ensure all JavaScript files are analyzed
-name: "Full JS Analysis"
-
-paths-ignore:
-  - "**/node_modules"
-  - "**/dist"
-  - "**/build"
-
-paths:
-  - "."
 
 queries:
   - uses: security-and-quality
   - uses: security-extended
   # Additional query suites for JavaScript
-  - uses: ./javascript/ql/src/Security/CWE-078 # Command Injection
-  - uses: ./javascript/ql/src/Security/CWE-079 # XSS
-  - uses: ./javascript/ql/src/Security/CWE-089 # SQL Injection
-  - uses: ./javascript/ql/src/Security/CWE-094 # Code Injection
-  - uses: ./javascript/ql/src/Security/CWE-502 # Unsafe Deserialization
+  - uses: ./javascript/ql/src/Security/CWE-078  # Command Injection
+  - uses: ./javascript/ql/src/Security/CWE-079  # XSS
+  - uses: ./javascript/ql/src/Security/CWE-089  # SQL Injection
+  - uses: ./javascript/ql/src/Security/CWE-094  # Code Injection
+  - uses: ./javascript/ql/src/Security/CWE-502  # Unsafe Deserialization
 
-# Enable non-default queries
-disable-default-queries: false
+paths:
+  - "."
 
-# Enable more detailed analysis
-optimize: true
+paths-ignore:
+  - "**/node_modules"
+  - "**/dist"
+  - "**/build"

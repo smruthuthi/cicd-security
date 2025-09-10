@@ -1,12 +1,22 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = 3000;
 
-// Simple endpoint
-app.get("/", (req, res) => {
-  res.send("Hello, Kubernetes + CodeQL + Lint 🚀");
+// 🚨 Vulnerable: Directly using user input in eval() - CodeQL will flag this
+app.get("/eval", (req, res) => {
+  const userInput = req.query.input;
+  try {
+    const result = eval(userInput); // ❌ Code injection vulnerability
+    res.send(`Result: ${result}`);
+  } catch (e) {
+    res.status(500).send("Error in execution");
+  }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.get("/", (req, res) => {
+  res.send("Hello from vulnerable Node.js app! Try /eval?input=2+2");
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });

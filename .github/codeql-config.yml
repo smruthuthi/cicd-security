@@ -2,6 +2,27 @@
 name: "Full JS Analysis"
 
 paths-ignore:
+  - '**/node_modules'
+  - '**/dist'
+  - '**/build'
+
+paths:
+  - '.'
+
+queries:
+  - uses: security-and-quality
+  - uses: security-extended
+  # Additional security query suites
+  - name: Extended Security Queries
+    uses: security-extended
+    from: codeql/javascript-queries
+  - name: Command Injection
+    uses: codeql/javascript-queries:javascript/ql/src/Security/CWE-078-CommandInjection.ql@main
+  - name: SQL Injection
+    uses: codeql/javascript-queries:javascript/ql/src/Security/CWE-089-SqlInjection.ql@mainon file to ensure all JavaScript files are analyzed
+name: "Full JS Analysis"
+
+paths-ignore:
   - "**/node_modules"
   - "**/dist"
   - "**/build"

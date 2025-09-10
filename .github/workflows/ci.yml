@@ -28,7 +28,7 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-          queries: security-extended
+          config-file: .github/codeql-config.yml
 
       # Install dependencies before autobuild for better build context
       - name: Install dependencies

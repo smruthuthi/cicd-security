@@ -1,0 +1,13 @@
+# CodeQL configuration file to ensure all JavaScript files are analyzed
+name: "Full JS Analysis"
+
+paths:
+  - app.js
+
+# Optionally, you can add more files or folders if needed
+# paths:
+#   - app.js
+#   - src/
+
+queries:
+  - uses: security-extended

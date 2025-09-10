@@ -2,9 +2,9 @@ name: CodeQL and Lint
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   analyze:
@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ "javascript" ]
+        language: ["javascript"]
 
     steps:
       - name: Checkout repository
@@ -30,11 +30,22 @@ jobs:
           languages: ${{ matrix.language }}
           queries: security-extended
 
+      # Install dependencies before autobuild for better build context
+      - name: Install dependencies
+        run: npm install
+
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+
+      # Upload CodeQL database as artifact (optional, for debugging)
+      - name: Upload CodeQL database
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeql-database
+          path: ./.codeql
 
   lint:
     name: Run ESLint
@@ -54,3 +65,20 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+
+  # --- Security: npm audit ---
+  audit:
+    name: Run npm audit
+    runs-on: ubuntu-latest
+    needs: [analyze, lint]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - name: Install dependencies
+        run: npm install
+      - name: Run npm audit
+        run: npm audit --audit-level=low || true

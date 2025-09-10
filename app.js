@@ -45,7 +45,7 @@ app.get("/user", (req, res) => {
 // Vulnerable: Command Injection
 app.get("/ping", (req, res) => {
   const host = req.query.host; // attacker-controlled
-  exec(`ping -c 1 ${host}`, (err, stdout, stderr) => {
+  exec(`ping -c 1 ${host}`, (err, stdout) => {
     if (err) {
       res.status(500).send("Ping failed");
     } else {
